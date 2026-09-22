@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>롤토체스 최적 조합 탐색기</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="head">
+      <h1>롤토체스 최적 조합 탐색기</h1>
+      <p class="sub">원하는 상징을 넣으면 그 상징을 가장 잘 살리는 조합을 찾아줍니다.</p>
+    </header>
+
+    <section class="panel" aria-label="입력">
+      <div class="field">
+        <span class="field-label">탐색 방식</span>
+        <div class="modes" id="modeGroup" role="radiogroup" aria-label="탐색 방식">
+          <label class="mode">
+            <input type="radio" name="mode" value="specialization" checked />
+            <span class="mode-body">
+              <span class="mode-name">상징 특화</span>
+              <span class="mode-desc">입력한 상징의 시너지 레벨을 최대한 끌어올립니다.</span>
+            </span>
+          </label>
+          <label class="mode">
+            <input type="radio" name="mode" value="flexibility" />
+            <span class="mode-body">
+              <span class="mode-name">유연함</span>
+              <span class="mode-desc">활성화되는 시너지 종류 수를 최대로 늘립니다.</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">상징 <span class="hint" id="emblemHint">(하나 이상 선택)</span></span>
+        <div id="emblemRows" class="emblem-rows"></div>
+        <button type="button" id="addEmblem" class="ghost">상징 추가</button>
+      </div>
+
+      <div class="field field-inline">
+        <label class="field-label" for="boardSize">배치 기물 수</label>
+        <input type="number" id="boardSize" value="8" min="1" max="10" />
+      </div>
+
+      <button type="button" id="run" class="primary">최적 조합 찾기</button>
+    </section>
+
+    <section id="status" class="status" hidden></section>
+    <section id="result" class="result" hidden></section>
+
+    <footer class="foot">
+      <p>데이터는 <code>data.js</code>에 있으며, 세트가 바뀌면 그 파일만 수정하면 됩니다.</p>
+    </footer>
+  </main>
+
+  <!-- 클래식 스크립트: 전역 CHAMPIONS / TRAITS / solve 를 공유합니다.
+       메인 스레드 폴백(파일 직접 열기 등)에서도 동작하도록 함께 불러옵니다. -->
+  <script src="data.js"></script>
+  <script src="solver.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
